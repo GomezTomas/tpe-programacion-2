@@ -13,5 +13,9 @@ public class Main {
         lista.insertNode(new Node(1));
         lista.insertNode(new Node(2));
         lista.insertNode(new Node(4));
+
+        lista.deleteNode(5);
+
+        lista.print();
     }
 }

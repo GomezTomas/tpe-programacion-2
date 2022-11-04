@@ -30,17 +30,41 @@ public class OrderedList {
             pointer.setNextNode(node);
         }
 
-        System.out.println("----------------------------------");
-        this.print();
+//        System.out.println("----------------------------------");
+//        this.print();
     }
 
-//    public void deleteNode(int position){
-//
-//    }
+    public void deleteNode(int position){
+        pointer = startNode;
+        int pointerPosition = 0;
+        while (pointer != null && pointerPosition < (position-1)){
+            pointer = pointer.getNextNode();
+            pointerPosition++;
+        }
 
-//    public void deleteNode(Node element){
-//
-//    }
+        if (position == 0){
+            startNode = startNode.getNextNode();
+        }else{
+            if(pointer != null){
+                Node toDelete = pointer.getNextNode();
+                if(toDelete != null){
+                    pointer.setNextNode(toDelete.getNextNode());
+                }
+            }
+        }
+    }
+
+    public void deleteNode(Node element){
+        pointer = startNode;
+        int pointerPosition = 0;
+        while (pointer != null){
+            if(pointer.getElement() == element.getElement()){
+                this.deleteNode(pointerPosition);
+            };
+            pointerPosition++;
+            pointer = pointer.getNextNode();
+        }
+    }
 
 //    public int getElement(Object element){
 //        return 1;
