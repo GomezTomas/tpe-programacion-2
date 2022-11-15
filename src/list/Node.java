@@ -1,15 +1,15 @@
 package list;
 
-public class Node {
-    int element;
+public class Node implements Comparable{
+    Object element;
     Node nextNode;
 
-    public Node(int object) {
+    public Node(Object object) {
         this.element = object;
         this.nextNode = null;
     }
 
-    public int getElement() {
+    public Object getElement() {
         return element;
     }
 
@@ -30,5 +30,10 @@ public class Node {
         return "Node{" +
                 "element=" + element +
                 '}';
+    }
+
+    @Override
+    public int compareTo(Object o) {
+        return ((Comparable) element).compareTo(((Node)o).getElement());
     }
 }

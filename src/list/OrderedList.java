@@ -4,23 +4,32 @@ public class OrderedList {
 
     Node startNode;
     Node pointer;
+    Order order;
 
     public OrderedList(){
         startNode = null;
         pointer = null;
+        order = new OrderAsc();
+    }
+    public OrderedList(Order order){
+        startNode = null;
+        pointer = null;
+        this.order = order;
     }
 
     public void insertNode(Node node){
         if (startNode == null){
             startNode = node;
-        } else if (node.getElement() < startNode.getElement() ) {
+//        } else if (node.getElement() < startNode.getElement() ) {
+        }else if(order.getOrder(node, startNode)){
             node.setNextNode(startNode);
             startNode = node;
         } else {
-            pointer = startNode;
+            Node pointer = startNode;
             boolean found = false;
             while (!found && (pointer.getNextNode() != null)) {
-                if (node.getElement() < pointer.getNextNode().getElement()) {
+                if (order.getOrder(node, pointer.getNextNode())){
+//                if (node.getElement() < pointer.getNextNode().getElement()) {
                     found = true;
                 } else {
                     pointer = pointer.getNextNode();
@@ -29,9 +38,6 @@ public class OrderedList {
             node.setNextNode(pointer.nextNode);
             pointer.setNextNode(node);
         }
-
-//        System.out.println("----------------------------------");
-//        this.print();
     }
 
     public void deleteNode(int position){
@@ -54,32 +60,65 @@ public class OrderedList {
         }
     }
 
-    public void deleteNode(Node element){
+    public void deleteNode(Node node){
         pointer = startNode;
-        int pointerPosition = 0;
-        while (pointer != null){
-            if(pointer.getElement() == element.getElement()){
-                this.deleteNode(pointerPosition);
-            };
-            pointerPosition++;
-            pointer = pointer.getNextNode();
+        while (pointer != null && pointer.getNextNode() != null){
+//            if (pointer == startNode && pointer.getElement() == element.getElement()){
+            if (pointer == startNode && pointer.compareTo(node) == 0){
+                startNode = startNode.getNextNode();
+                pointer = startNode;
+//            }else if(pointer.getNextNode().getElement() == element.getElement()){
+            }else if(pointer.getNextNode().compareTo(node) == 0){
+                Node toDelete = pointer.getNextNode();
+                pointer.setNextNode(toDelete.getNextNode());
+            }else{
+                pointer = pointer.getNextNode();
+            }
         }
     }
 
-//    public int getElement(Object element){
-//        return 1;
-//    }
+    public Object getElement(Node node){
+        pointer = startNode;
+        int pointerPosition = 0;
+        while (pointer != null){
+//            if(pointer.getElement() == element.getElement()){
+            if(pointer.compareTo(node) == 0){
+                return pointerPosition;
+            }else{
+                pointer = pointer.getNextNode();
+                pointerPosition++;
+            }
+        }
+        return null;
+    }
 
     public void print(){
         pointer = startNode;
         while (pointer != null) {
             System.out.println(pointer);
-            pointer = pointer.nextNode;
+            pointer = pointer.getNextNode();
         }
     }
 
-//    public void setOrder(OrderBy order){
-//
-//    }
+
+
+    public void recorrer(){
+        pointer = startNode;
+        while (pointer != null){
+            pointer = pointer.getNextNode();
+        }
+    }
+
+    public void setOrder(Order order){
+        OrderedList aux = new OrderedList(order);
+        pointer = startNode;
+        while (pointer != null){
+            Node auxNode = new Node(pointer.getElement());
+            aux.insertNode(auxNode);
+            pointer = pointer.getNextNode();
+        }
+        startNode = aux.startNode;
+        aux = null;
+    }
 
 }
