@@ -77,7 +77,7 @@ public class OrderedList {
         }
     }
 
-    public Object getElement(Node node){
+    public int getElementPosition(Node node){
         pointer = startNode;
         int pointerPosition = 0;
         while (pointer != null){
@@ -89,7 +89,7 @@ public class OrderedList {
                 pointerPosition++;
             }
         }
-        return null;
+        return -1;
     }
 
     public void print(){
@@ -118,7 +118,6 @@ public class OrderedList {
             pointer = pointer.getNextNode();
         }
         startNode = aux.startNode;
-        aux = null;
     }
 
 }

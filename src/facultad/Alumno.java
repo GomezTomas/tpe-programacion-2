@@ -1,3 +1,5 @@
+package facultad;
+
 import java.util.ArrayList;
 
 public class Alumno implements Comparable{
@@ -65,4 +67,14 @@ public class Alumno implements Comparable{
 
         return (int) (this.dni - alumno.dni);
     }
+
+    @Override
+    public String toString() {
+        return "facultad.Alumno{" +
+                "apellido='" + apellido + '\'' +
+                ", nombre='" + nombre + '\'' +
+                ", dni=" + dni +
+                '}';
+    }
+
 }
