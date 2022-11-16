@@ -20,7 +20,6 @@ public class OrderedList {
     public void insertNode(Node node){
         if (startNode == null){
             startNode = node;
-//        } else if (node.getElement() < startNode.getElement() ) {
         }else if(order.getOrder(node, startNode)){
             node.setNextNode(startNode);
             startNode = node;
@@ -29,7 +28,6 @@ public class OrderedList {
             boolean found = false;
             while (!found && (pointer.getNextNode() != null)) {
                 if (order.getOrder(node, pointer.getNextNode())){
-//                if (node.getElement() < pointer.getNextNode().getElement()) {
                     found = true;
                 } else {
                     pointer = pointer.getNextNode();
@@ -48,7 +46,7 @@ public class OrderedList {
             pointerPosition++;
         }
 
-        if (position == 0){
+        if (position == 0 && startNode != null){
             startNode = startNode.getNextNode();
         }else{
             if(pointer != null){
@@ -63,11 +61,9 @@ public class OrderedList {
     public void deleteNode(Node node){
         pointer = startNode;
         while (pointer != null && pointer.getNextNode() != null){
-//            if (pointer == startNode && pointer.getElement() == element.getElement()){
             if (pointer == startNode && pointer.compareTo(node) == 0){
                 startNode = startNode.getNextNode();
                 pointer = startNode;
-//            }else if(pointer.getNextNode().getElement() == element.getElement()){
             }else if(pointer.getNextNode().compareTo(node) == 0){
                 Node toDelete = pointer.getNextNode();
                 pointer.setNextNode(toDelete.getNextNode());
@@ -81,7 +77,6 @@ public class OrderedList {
         pointer = startNode;
         int pointerPosition = 0;
         while (pointer != null){
-//            if(pointer.getElement() == element.getElement()){
             if(pointer.compareTo(node) == 0){
                 return pointerPosition;
             }else{
@@ -100,13 +95,8 @@ public class OrderedList {
         }
     }
 
-
-
-    public void recorrer(){
-        pointer = startNode;
-        while (pointer != null){
-            pointer = pointer.getNextNode();
-        }
+    private Node getStartNode(){
+        return startNode;
     }
 
     public void setOrder(Order order){
@@ -117,7 +107,7 @@ public class OrderedList {
             aux.insertNode(auxNode);
             pointer = pointer.getNextNode();
         }
-        startNode = aux.startNode;
+        startNode = aux.getStartNode();
     }
 
 }

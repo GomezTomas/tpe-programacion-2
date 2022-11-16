@@ -1,9 +1,10 @@
 package facultad;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
-public class Alumno implements Comparable{
-    private String nombre;
+public class Alumno extends ElementoFacultad implements Comparable{
+//    private String nombre;
     private String apellido;
     private long dni;
     private int edad;
@@ -77,4 +78,13 @@ public class Alumno implements Comparable{
                 '}';
     }
 
+    @Override
+    public int getCantidadAlumnos() {
+        return 1;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        return this.compareTo(o) == 0;
+    }
 }
