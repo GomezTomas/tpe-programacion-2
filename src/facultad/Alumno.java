@@ -10,7 +10,7 @@ public class Alumno extends ElementoFacultad{
     private int dni;
     private int edad;
     private ArrayList<String> intereses;
-    private ComparatorElementoFacultad comparator;
+//    private ComparatorElementoFacultad comparator;
 
     public Alumno(String nombre, String apellido, int dni, int edad) {
         super(nombre);
@@ -66,11 +66,7 @@ public class Alumno extends ElementoFacultad{
 
     @Override
     public String toString() {
-        return "facultad.Alumno{" +
-                "apellido='" + apellido + '\'' +
-                ", nombre='" + nombre + '\'' +
-                ", dni=" + dni +
-                '}';
+        return apellido + ", " + nombre + ". DNI:" + dni;
     }
 
     @Override
@@ -78,8 +74,4 @@ public class Alumno extends ElementoFacultad{
         return 1;
     }
 
-//    @Override
-//    public boolean equals(Object o) {
-//        return this.compareTo(o) == 0;
-//    }
 }

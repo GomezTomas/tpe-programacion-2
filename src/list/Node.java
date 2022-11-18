@@ -1,27 +1,27 @@
 package list;
 
-public class Node implements Comparable<Node>{
-    Object element;
-    Node nextNode;
+public class Node<T>{
+    T element;
+    Node<T> nextNode;
 
-    public Node(Object object) {
-        this.element = object;
+    public Node(T element) {
+        this.element = element;
         this.nextNode = null;
     }
 
-    public Object getElement() {
+    public T getElement() {
         return element;
     }
 
-    public void setElement(int element) {
+    public void setElement(T element) {
         this.element = element;
     }
 
-    public Node getNextNode() {
+    public Node<T> getNextNode() {
         return nextNode;
     }
 
-    public void setNextNode(Node nextNode) {
+    public void setNextNode(Node<T> nextNode) {
         this.nextNode = nextNode;
     }
 
@@ -30,10 +30,5 @@ public class Node implements Comparable<Node>{
         return "Node{" +
                 "element=" + element +
                 '}';
-    }
-
-    @Override
-    public int compareTo(Node node) {
-        return ((Comparable) element).compareTo(node.getElement());
     }
 }

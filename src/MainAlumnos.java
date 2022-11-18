@@ -1,10 +1,11 @@
+import comparators.ComparatorApellido;
 import facultad.Alumno;
 import list.Node;
 import list.OrderedList;
 
 public class MainAlumnos {
     public static void main(String[] args) {
-        OrderedList lista = new OrderedList();
+        OrderedList lista = new OrderedList(new ComparatorApellido());
 //        lista.deleteNode(0);
 //        lista.print();
 
@@ -38,6 +39,6 @@ public class MainAlumnos {
 
         lista.deleteNode(new Node(federico));
         System.out.println("-----------------------------------------------");
-        lista.print();
+//        lista.print();
     }
 }

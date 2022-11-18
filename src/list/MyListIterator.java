@@ -2,11 +2,11 @@ package list;
 
 import java.util.Iterator;
 
-public class MyListIterator implements Iterator {
+public class MyListIterator<T> implements Iterator<T> {
 
-    private Node pointer;
+    private Node<T> pointer;
 
-    public MyListIterator(Node pointer) {
+    public MyListIterator(Node<T> pointer) {
         this.pointer = pointer;
     }
 
@@ -17,13 +17,13 @@ public class MyListIterator implements Iterator {
 
 
     @Override
-    public Object next() {
-        Object value = pointer.getElement();
+    public T next() {
+        T value = pointer.getElement();
         pointer = pointer.getNextNode();
         return value;
     }
 
-    protected void setPointer(Node node){
+    protected void setPointer(Node<T> node){
         this.pointer = node;
     }
 

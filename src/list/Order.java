@@ -1,5 +1,7 @@
 package list;
 
-public abstract class Order{
-    public abstract boolean isLower(Node newNode, Node existingNode);
+import java.util.Comparator;
+
+public abstract class Order<T>{
+    public abstract boolean isLower(Node<T> newNode, Node<T> existingNode, Comparator<T> comparator);
 }

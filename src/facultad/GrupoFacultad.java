@@ -1,60 +1,60 @@
 package facultad;
 
+import comparators.*;
 import list.Node;
 import list.OrderedList;
 
-import java.util.ArrayList;
 
 public class GrupoFacultad extends ElementoFacultad{
 
-    private OrderedList listaElementos;
-    private int cantidadAlumnos;
+    private OrderedList<ElementoFacultad> listaElementos;
+//    private int cantidadAlumnos;
+    private ComparatorElementoFacultad comparator;
 
-    public GrupoFacultad(String nombre, int cantidadAlumnos){
+    public GrupoFacultad(String nombre){
         super(nombre);
-        listaElementos = new OrderedList();
-        this.cantidadAlumnos = cantidadAlumnos;
+        this.comparator = new ComparatorCantAlumnos(
+                                new ComparatorApellido(
+                                    new ComparatorNombre(
+                                        new ComparatorDNI()
+                                    )
+                                )
+                                                );
+
+        listaElementos = new OrderedList<>(comparator);
+    }
+
+    public void setComparator(ComparatorElementoFacultad comparator) {
+        this.comparator = comparator;
+        listaElementos.setComparator(comparator);
     }
 
     public void print(){
-        this.listaElementos.print();
+        for (Object elem : listaElementos){
+            System.out.println(elem);
+        }
     }
 
     public void addElemento(ElementoFacultad elementoFacultad){
-//        if(!elementos.contains(elementoFacultad)){
-//            int i = 0;
-//            while (i<elementos.size() && elementoFacultad.getCantidadAlumnos() > elementos.get(i).getCantidadAlumnos()){
-//                i++;
-//            }
-//            elementos.add(i, elementoFacultad);
-//        }
-        listaElementos.insertNode(new Node(elementoFacultad));
+        listaElementos.insertNode(new Node<>(elementoFacultad));
     }
 
 //    @Override
     public int getCantidadAlumnos() {
-//        int suma = 0;
-//        for (ElementoFacultad elem : elementos){
-//            suma += elem.getCantidadAlumnos();
-//        }
-        return this.cantidadAlumnos;
-//        return suma;
+        int suma = 0;
+        for (ElementoFacultad elem : listaElementos){
+            suma += elem.getCantidadAlumnos();
+        }
+//        return this.cantidadAlumnos;
+        return suma;
     }
 
-//    @Override
-//    public int compareTo(GrupoFacultad grupo) {
-//        return getCantidadAlumnos() -  grupo.getCantidadAlumnos();
-//    }
-
-    //
-//    public void print(){
-//        for (ElementoFacultad elem: elementos){
-//            System.out.println(elem);
-//        }
-//    }
-//
     @Override
     public String toString() {
-        return this.nombre  + ", " + this.getCantidadAlumnos();
+        String result = this.nombre;
+        for (ElementoFacultad elem : listaElementos){
+            result = result + ", " + elem.toString();
+        }
+        return result;
     }
 }
