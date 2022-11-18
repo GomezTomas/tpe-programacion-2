@@ -1,66 +1,78 @@
 package list;
 
-public class OrderedList {
+import java.util.Iterator;
+
+public class OrderedList implements Iterable{
 
     Node startNode;
     Node pointer;
     Order order;
+//    public MyListIterator listIterator;
+
 
     public OrderedList(){
-        startNode = null;
-        pointer = null;
-        order = new OrderAsc();
+        this(new OrderAsc());
     }
     public OrderedList(Order order){
         startNode = null;
         pointer = null;
         this.order = order;
+//        listIterator = new MyListIterator();
     }
 
     public void insertNode(Node node){
         if (startNode == null){
             startNode = node;
-        }else if(order.getOrder(node, startNode)){
+        }else if(order.isLower(node, startNode)){
             node.setNextNode(startNode);
             startNode = node;
         } else {
-            Node pointer = startNode;
+            pointer = startNode;
             boolean found = false;
             while (!found && (pointer.getNextNode() != null)) {
-                if (order.getOrder(node, pointer.getNextNode())){
+                if (order.isLower(node, pointer.getNextNode())){
                     found = true;
                 } else {
                     pointer = pointer.getNextNode();
                 }
             }
-            node.setNextNode(pointer.nextNode);
+            node.setNextNode(pointer.getNextNode());
             pointer.setNextNode(node);
         }
+//        this.listIterator.setPointer(startNode);
     }
 
     public void deleteNode(int position){
+        if(startNode == null)
+            return;
+
+        if (position == 0){
+            startNode = startNode.getNextNode();
+        }
+
         pointer = startNode;
         int pointerPosition = 0;
+
         while (pointer != null && pointerPosition < (position-1)){
             pointer = pointer.getNextNode();
             pointerPosition++;
         }
 
-        if (position == 0 && startNode != null){
-            startNode = startNode.getNextNode();
-        }else{
-            if(pointer != null){
-                Node toDelete = pointer.getNextNode();
-                if(toDelete != null){
-                    pointer.setNextNode(toDelete.getNextNode());
-                }
+        if(pointer != null){
+            Node toDelete = pointer.getNextNode();
+            if(toDelete != null){
+                pointer.setNextNode(toDelete.getNextNode());
             }
         }
+
     }
 
     public void deleteNode(Node node){
+        if(startNode == null)
+            return;
+
         pointer = startNode;
-        while (pointer != null && pointer.getNextNode() != null){
+        while (pointer.getNextNode() != null){
             if (pointer == startNode && pointer.compareTo(node) == 0){
                 startNode = startNode.getNextNode();
                 pointer = startNode;
@@ -70,6 +82,10 @@ public class OrderedList {
             }else{
                 pointer = pointer.getNextNode();
             }
+        }
+
+        if(startNode.compareTo(node) == 0){
+            startNode = null;
         }
     }
 
@@ -108,6 +124,11 @@ public class OrderedList {
             pointer = pointer.getNextNode();
         }
         startNode = aux.getStartNode();
+    }
+
+    @Override
+    public Iterator iterator() {
+        return new MyListIterator(startNode);
     }
 
 }

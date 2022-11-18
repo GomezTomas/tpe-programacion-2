@@ -1,6 +1,6 @@
 package list;
 
-public class Node implements Comparable{
+public class Node implements Comparable<Node>{
     Object element;
     Node nextNode;
 
@@ -13,7 +13,7 @@ public class Node implements Comparable{
         return element;
     }
 
-    public void setObject(int element) {
+    public void setElement(int element) {
         this.element = element;
     }
 
@@ -33,7 +33,7 @@ public class Node implements Comparable{
     }
 
     @Override
-    public int compareTo(Object o) {
-        return ((Comparable) element).compareTo(((Node)o).getElement());
+    public int compareTo(Node node) {
+        return ((Comparable) element).compareTo(node.getElement());
     }
 }

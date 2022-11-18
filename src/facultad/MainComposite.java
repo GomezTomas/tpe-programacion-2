@@ -10,15 +10,20 @@ public class MainComposite {
         Alumno juana = new Alumno("Juana", "Garcia", 27123455, 18);
         Alumno federico = new Alumno("Federico", "Lopez", 35999888, 18);
 
-        GrupoFacultad unicen = new GrupoFacultad("unicen");
-        GrupoFacultad humanas = new GrupoFacultad("humanas");
-        GrupoFacultad exactas = new GrupoFacultad("exactas");
-        GrupoFacultad historia = new GrupoFacultad("Historia");
+        GrupoFacultad unicen = new GrupoFacultad("unicen", 1);
+//        GrupoFacultad humanas = new GrupoFacultad("humanas");
+//        GrupoFacultad exactas = new GrupoFacultad("exactas");
+        GrupoFacultad historia = new GrupoFacultad("Historia", 1);
 
         historia.addElemento(flora);
         historia.addElemento(martin);
         historia.addElemento(roman);
 
-        System.out.println(historia);
+        unicen.addElemento(historia);
+        unicen.addElemento(jhon);
+
+//        System.out.println(unicen);
+        unicen.print();
     }
+
 }

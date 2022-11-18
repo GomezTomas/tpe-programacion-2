@@ -1,23 +1,19 @@
 package facultad;
 
-import Comparators.ComparatorAlumno;
-import Comparators.ComparatorApellido;
-import Comparators.ComparatorDNI;
-import Comparators.ComparatorNombre;
+import comparators.*;
 
 import java.util.ArrayList;
-import java.util.Objects;
 
-public class Alumno extends ElementoFacultad implements Comparable<Alumno>{
+public class Alumno extends ElementoFacultad{
 //    private String nombre;
     private String apellido;
     private int dni;
     private int edad;
     private ArrayList<String> intereses;
-    private ComparatorAlumno comparator;
+    private ComparatorElementoFacultad comparator;
 
     public Alumno(String nombre, String apellido, int dni, int edad) {
-        this.nombre = nombre;
+        super(nombre);
         this.apellido = apellido;
         this.dni = dni;
         this.edad = edad;
@@ -63,10 +59,10 @@ public class Alumno extends ElementoFacultad implements Comparable<Alumno>{
         this.edad = edad;
     }
 
-    @Override
-    public int compareTo(Alumno alumno) {
-        return this.comparator.compare(this, alumno);
-    }
+//    @Override
+//    public int compareTo(Alumno alumno) {
+//        return this.comparator.compare(this, alumno);
+//    }
 
     @Override
     public String toString() {

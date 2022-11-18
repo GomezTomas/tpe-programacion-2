@@ -17,14 +17,19 @@ public class Main {
         listaNumeros.insertNode(new Node(5));
         listaNumeros.insertNode(new Node(11));
 
-        listaNumeros.print();
+        for(Object elem : listaNumeros){
+            System.out.println(elem);
+        }
 
         listaNumeros.deleteNode(0);
         listaNumeros.deleteNode(new Node(5));
         listaNumeros.deleteNode(new Node(11));
 
         System.out.println("----------------------------------------");
-        listaNumeros.print();
+
+        for(Object elem : listaNumeros){
+            System.out.println(elem);
+        }
 
         OrderedList listaPalabras = new OrderedList();
         listaPalabras.insertNode(new Node("Facil"));
@@ -33,14 +38,18 @@ public class Main {
         listaPalabras.insertNode(new Node("Prog 2"));
 
         System.out.println("----------------------------------------");
-        listaPalabras.print();
+        for(Object elem : listaPalabras){
+            System.out.println(elem);
+        }
+
         System.out.println("----------------------------------------");
         System.out.println(listaPalabras.getElementPosition(new Node("Parcial")));
         System.out.println(listaPalabras.getElementPosition(new Node("Recuperatorio")));
         listaPalabras.setOrder(new OrderDesc());
         System.out.println("----------------------------------------");
-        listaPalabras.print();
-
+        for(Object elem : listaPalabras){
+            System.out.println(elem);
+        }
 
     }
 }

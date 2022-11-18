@@ -1,4 +1,4 @@
-package Comparators;
+package comparators;
 
 import facultad.Alumno;
 
@@ -8,13 +8,13 @@ public abstract class ComparatorAlumno implements Comparator<Alumno> {
 
     protected ComparatorAlumno nextComparator;
 
-//    public ComparatorAlumno() {
-//        nextComparator = null;
-//    }
-//
-//    public ComparatorAlumno(ComparatorAlumno nextComparator) {
-//        this.nextComparator = nextComparator;
-//    }
+    public ComparatorAlumno() {
+        nextComparator = null;
+    }
+
+    public ComparatorAlumno(ComparatorAlumno nextComparator) {
+        this.nextComparator = nextComparator;
+    }
 
     public abstract int comp(Alumno alu1, Alumno alu2);
 

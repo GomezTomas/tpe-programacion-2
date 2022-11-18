@@ -1,5 +1,5 @@
 package list;
 
 public abstract class Order{
-    public abstract boolean getOrder(Node newNode, Node existingNode);
+    public abstract boolean isLower(Node newNode, Node existingNode);
 }
