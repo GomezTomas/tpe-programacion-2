@@ -1,13 +1,8 @@
-import comparators.ComparatorNombre;
 import facultad.Alumno;
 import facultad.GrupoFacultad;
 import list.Node;
-import list.OrderAsc;
 import list.OrderDesc;
 import list.OrderedList;
-
-import java.util.Collections;
-import java.util.Comparator;
 
 public class Main {
     public static void main(String[] args) {
@@ -92,7 +87,6 @@ public class Main {
         federico.addIntereses("java");
         federico.addIntereses("Python");
 
-
         GrupoFacultad unicen = new GrupoFacultad("unicen");
         GrupoFacultad humanas = new GrupoFacultad("humanas");
         GrupoFacultad exactas = new GrupoFacultad("exactas");
@@ -112,6 +106,7 @@ public class Main {
         unicen.addElemento(humanas);
         unicen.addElemento(exactas);
 
+        System.out.println("----------------------------------------");
         System.out.println(unicen);
 
         GrupoFacultad olimpiadasMatematicas = new GrupoFacultad("Olimpiadas Matematicas");
@@ -145,6 +140,7 @@ public class Main {
         olimpiadasMatematicas.addElemento(matea2);
         olimpiadasMatematicas.addElemento(losFibo);
 
+        System.out.println("----------------------------------------");
         System.out.println(olimpiadasMatematicas);
     }
 }

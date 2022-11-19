@@ -7,7 +7,13 @@ public abstract class ElementoFacultad implements Comparable<ElementoFacultad>{
     protected ComparatorElementoFacultad comparator;
 
     public ElementoFacultad(String nombre) {
-        comparator = new ComparatorCantAlumnos(new ComparatorApellido(new ComparatorNombre(new ComparatorDNI())));
+        this.comparator = new ComparatorCantAlumnos(
+                            new ComparatorApellido(
+                                new ComparatorNombre(
+                                    new ComparatorDNI()
+                                )
+                            )
+                        );
         this.nombre = nombre;
     }
 
@@ -20,7 +26,7 @@ public abstract class ElementoFacultad implements Comparable<ElementoFacultad>{
     public abstract int getCantidadAlumnos();
 
     @Override
-    public int compareTo(ElementoFacultad o) {
-        return this.getCantidadAlumnos() - o.getCantidadAlumnos();
+    public int compareTo(ElementoFacultad elem) {
+        return this.getCantidadAlumnos() - elem.getCantidadAlumnos();
     }
 }

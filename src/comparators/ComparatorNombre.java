@@ -17,7 +17,7 @@ public class ComparatorNombre extends ComparatorElementoFacultad{
         try {
             Alumno aluAux1 = (Alumno) alu1;
             Alumno aluAux2 = (Alumno) alu2;
-            return alu1.getNombre().compareTo(alu2.getNombre());
+            return aluAux1.getNombre().compareTo(aluAux2.getNombre());
         }catch (Exception e){
             return 1;
         }

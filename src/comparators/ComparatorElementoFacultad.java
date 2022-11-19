@@ -8,7 +8,7 @@ public abstract class ComparatorElementoFacultad implements Comparator<ElementoF
     ComparatorElementoFacultad nextComparator;
 
     public ComparatorElementoFacultad() {
-        nextComparator = null;
+        this.nextComparator = null;
     }
 
     public ComparatorElementoFacultad(ComparatorElementoFacultad nextComparator) {
@@ -20,8 +20,8 @@ public abstract class ComparatorElementoFacultad implements Comparator<ElementoF
     @Override
     public int compare(ElementoFacultad o1, ElementoFacultad o2) {
         int result = this.comp(o1, o2);
-        if (result == 0 && nextComparator != null){
-            return nextComparator.compare(o1, o2);
+        if (result == 0 && this.nextComparator != null){
+            return this.nextComparator.compare(o1, o2);
         }
         return result;
     }

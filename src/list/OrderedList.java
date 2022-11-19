@@ -7,107 +7,99 @@ import java.util.Iterator;
 
 public class OrderedList<T> implements Iterable<T>{
 
-    Node<T> startNode;
-    Node<T> pointer;
-    Order<T> order;
-    Comparator<T> comparator;
-
+    private Node<T> startNode;
+    private Node<T> pointer;
+    private Order<T> order;
+    private Comparator<T> comparator;
 
     public OrderedList(Comparator<T> comparator){
         this(new OrderAsc<>(), comparator);
     }
 
     public OrderedList(){
-        order = new OrderAsc<>();
-        comparator = new ComparatorGenerico<>();
+        this.order = new OrderAsc<>();
+        this.comparator = new ComparatorGenerico<>();
     }
+
     public OrderedList(Order<T> order, Comparator<T> comparator){
-        startNode = null;
-        pointer = null;
+        this.startNode = null;
+        this.pointer = null;
         this.order = order;
         this.comparator = comparator;
     }
 
     public void insertNode(Node<T> node){
-        if (startNode == null){
-            startNode = node;
-        }else if(order.isLower(node, startNode, comparator)){
-            node.setNextNode(startNode);
-            startNode = node;
+        if (this.startNode == null){
+            this.startNode = node;
+        }else if(this.order.isLower(node, this.startNode, this.comparator)){
+            node.setNextNode(this.startNode);
+            this.startNode = node;
         } else {
-            pointer = startNode;
+            this.pointer = this.startNode;
             boolean found = false;
-            while (!found && (pointer.getNextNode() != null)) {
-                if (order.isLower(node, pointer.getNextNode(), comparator)){
+            while (!found && (this.pointer.getNextNode() != null)) {
+                if (this.order.isLower(node, this.pointer.getNextNode(), this.comparator)){
                     found = true;
                 } else {
-                    pointer = pointer.getNextNode();
+                    this.pointer = this.pointer.getNextNode();
                 }
             }
-            node.setNextNode(pointer.getNextNode());
-            pointer.setNextNode(node);
+            node.setNextNode(this.pointer.getNextNode());
+            this.pointer.setNextNode(node);
         }
     }
 
     public void deleteNode(int position){
         if(position < 0)
             return;
-
-        if(startNode == null)
+        if(this.startNode == null)
             return;
-
-        if (position == 0){
-            startNode = startNode.getNextNode();
+        if (position == 0) {
+            this.startNode = this.startNode.getNextNode();
             return;
         }
-
-        pointer = startNode;
+        this.pointer = this.startNode;
         int pointerPosition = 0;
-
-        while (pointer != null && pointerPosition < (position-1)){
-            pointer = pointer.getNextNode();
+        while (this.pointer != null && pointerPosition < (position-1)){
+            this.pointer = this.pointer.getNextNode();
             pointerPosition++;
         }
-
-        if(pointer != null){
-            Node<T> toDelete = pointer.getNextNode();
+        if(this.pointer != null){
+            Node<T> toDelete = this.pointer.getNextNode();
             if(toDelete != null){
-                pointer.setNextNode(toDelete.getNextNode());
+                this.pointer.setNextNode(toDelete.getNextNode());
             }
         }
-
     }
 
     public void deleteNode(Node<T> node){
-        if(startNode == null)
+        if(this.startNode == null)
             return;
-
-        pointer = startNode;
-        while (pointer.getNextNode() != null){
-            if (pointer == startNode && comparator.compare(pointer.getElement(), node.getElement()) == 0){
-                startNode = startNode.getNextNode();
-                pointer = startNode;
-            }else if(comparator.compare(pointer.getNextNode().getElement(), node.getElement()) == 0){
-                Node<T> toDelete = pointer.getNextNode();
-                pointer.setNextNode(toDelete.getNextNode());
+        this.pointer = this.startNode;
+        while (this.pointer.getNextNode() != null){
+            if (this.pointer == this.startNode && this.comparator.compare(this.pointer.getElement(), node.getElement()) == 0){
+                this.startNode = this.startNode.getNextNode();
+                this.pointer = this.startNode;
+            }else if(this.comparator.compare(this.pointer.getNextNode().getElement(), node.getElement()) == 0){
+                Node<T> toDelete = this.pointer.getNextNode();
+                this.pointer.setNextNode(toDelete.getNextNode());
             }else{
-                pointer = pointer.getNextNode();
+                this.pointer = this.pointer.getNextNode();
             }
         }
-
-        if(comparator.compare(startNode.getElement(), node.getElement()) == 0){
-            startNode = null;
+        if(this.comparator.compare(this.startNode.getElement(), node.getElement()) == 0){
+            this.startNode = null;
         }
     }
 
     public int getElementPosition(Node<T> node){
-        pointer = startNode;
+        this.pointer = this.startNode;
         int pointerPosition = 0;
-        while (pointer != null){
-            if(comparator.compare(pointer.getElement(),node.getElement()) == 0){
+        while (this.pointer != null){
+            if(this.comparator.compare(this.pointer.getElement(),node.getElement()) == 0){
                 return pointerPosition;
             }else{
-                pointer = pointer.getNextNode();
+                this.pointer = this.pointer.getNextNode();
                 pointerPosition++;
             }
         }
@@ -115,18 +107,18 @@ public class OrderedList<T> implements Iterable<T>{
     }
 
     private Node<T> getStartNode(){
-        return startNode;
+        return this.startNode;
     }
 
     public void setOrder(Order<T> order){
-        OrderedList<T> aux = new OrderedList<>(order, comparator);
-        pointer = startNode;
-        while (pointer != null){
-            Node<T> auxNode = new Node<>(pointer.getElement());
+        OrderedList<T> aux = new OrderedList<>(order, this.comparator);
+        this.pointer = this.startNode;
+        while (this.pointer != null){
+            Node<T> auxNode = new Node<>(this.pointer.getElement());
             aux.insertNode(auxNode);
-            pointer = pointer.getNextNode();
+            this.pointer = this.pointer.getNextNode();
         }
-        startNode = aux.getStartNode();
+        this.startNode = aux.getStartNode();
     }
 
     public void setComparator(Comparator<T> comparator){
@@ -136,7 +128,6 @@ public class OrderedList<T> implements Iterable<T>{
 
     @Override
     public Iterator<T> iterator() {
-        return new MyListIterator<>(startNode);
+        return new MyListIterator<>(this.startNode);
     }
-
 }

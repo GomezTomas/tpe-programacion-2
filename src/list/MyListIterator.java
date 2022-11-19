@@ -12,20 +12,13 @@ public class MyListIterator<T> implements Iterator<T> {
 
     @Override
     public boolean hasNext() {
-        return pointer != null;
+        return this.pointer != null;
     }
-
 
     @Override
     public T next() {
-        T value = pointer.getElement();
-        pointer = pointer.getNextNode();
+        T value = this.pointer.getElement();
+        this.pointer = this.pointer.getNextNode();
         return value;
     }
-
-    protected void setPointer(Node<T> node){
-        this.pointer = node;
-    }
-
-
 }

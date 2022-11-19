@@ -10,7 +10,7 @@ public class Node<T>{
     }
 
     public T getElement() {
-        return element;
+        return this.element;
     }
 
     public void setElement(T element) {
@@ -18,17 +18,10 @@ public class Node<T>{
     }
 
     public Node<T> getNextNode() {
-        return nextNode;
+        return this.nextNode;
     }
 
     public void setNextNode(Node<T> nextNode) {
         this.nextNode = nextNode;
-    }
-
-    @Override
-    public String toString() {
-        return "Node{" +
-                "element=" + element +
-                '}';
     }
 }

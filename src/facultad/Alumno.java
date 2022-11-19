@@ -1,42 +1,38 @@
 package facultad;
 
-import comparators.*;
-
 import java.util.ArrayList;
 
 public class Alumno extends ElementoFacultad{
-//    private String nombre;
+
     private String apellido;
     private int dni;
     private int edad;
     private ArrayList<String> intereses;
-//    private ComparatorElementoFacultad comparator;
 
     public Alumno(String nombre, String apellido, int dni, int edad) {
         super(nombre);
         this.apellido = apellido;
         this.dni = dni;
         this.edad = edad;
-        intereses = new ArrayList<>();
-        comparator = new ComparatorApellido(new ComparatorNombre(new ComparatorDNI()));
+        this.intereses = new ArrayList<>();
     }
 
     public int getDni() {
-        return dni;
+        return this.dni;
     }
 
     public ArrayList<String> getIntereses() {
-        return new ArrayList<>(intereses);
+        return new ArrayList<>(this.intereses);
     }
 
     public void addIntereses(String palabra){
-        if(!intereses.contains(palabra)){
-            intereses.add(palabra);
+        if(!this.intereses.contains(palabra)){
+            this.intereses.add(palabra);
         }
     }
 
     public String getNombre() {
-        return nombre;
+        return this.nombre;
     }
 
     public void setNombre(String nombre) {
@@ -44,7 +40,7 @@ public class Alumno extends ElementoFacultad{
     }
 
     public String getApellido() {
-        return apellido;
+        return this.apellido;
     }
 
     public void setApellido(String apellido) {
@@ -52,26 +48,20 @@ public class Alumno extends ElementoFacultad{
     }
 
     public int getEdad() {
-        return edad;
+        return this.edad;
     }
 
     public void setEdad(int edad) {
         this.edad = edad;
     }
 
-//    @Override
-//    public int compareTo(Alumno alumno) {
-//        return this.comparator.compare(this, alumno);
-//    }
-
     @Override
     public String toString() {
-        return apellido + ", " + nombre + ". DNI:" + dni;
+        return this.apellido + ", " + this.nombre + ". DNI:" + this.dni;
     }
 
     @Override
     public int getCantidadAlumnos() {
         return 1;
     }
-
 }
