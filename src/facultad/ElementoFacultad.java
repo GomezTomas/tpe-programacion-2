@@ -2,18 +2,12 @@ package facultad;
 
 import comparators.*;
 
-public abstract class ElementoFacultad implements Comparable<ElementoFacultad>{
+public abstract class ElementoFacultad{
     protected String nombre;
-    protected ComparatorElementoFacultad comparator;
+//    protected ComparatorElementoFacultad comparator;
 
     public ElementoFacultad(String nombre) {
-        this.comparator = new ComparatorCantAlumnos(
-                            new ComparatorApellido(
-                                new ComparatorNombre(
-                                    new ComparatorDNI()
-                                )
-                            )
-                        );
+//        this.comparator = new ComparatorCantAlumnos();
         this.nombre = nombre;
     }
 
@@ -25,8 +19,4 @@ public abstract class ElementoFacultad implements Comparable<ElementoFacultad>{
     }
     public abstract int getCantidadAlumnos();
 
-    @Override
-    public int compareTo(ElementoFacultad elem) {
-        return this.getCantidadAlumnos() - elem.getCantidadAlumnos();
-    }
 }

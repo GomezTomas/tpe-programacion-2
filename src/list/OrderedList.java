@@ -1,6 +1,7 @@
 package list;
 
 import comparators.ComparatorGenerico;
+import comparators.ComparatorInverso;
 
 import java.util.Comparator;
 import java.util.Iterator;
@@ -9,36 +10,40 @@ public class OrderedList<T> implements Iterable<T>{
 
     private Node<T> startNode;
     private Node<T> pointer;
-    private Order<T> order;
+//    private Order<T> order;
     private Comparator<T> comparator;
 
-    public OrderedList(Comparator<T> comparator){
-        this(new OrderAsc<>(), comparator);
-    }
+//    public OrderedList(Comparator<T> comparator){
+//        this(new OrderAsc<>(), comparator);
+//    }
 
     public OrderedList(){
-        this.order = new OrderAsc<>();
-        this.comparator = new ComparatorGenerico<>();
+//        this.order = new OrderAsc<>();
+//        this.comparator = new ComparatorGenerico<>();
+        this(new ComparatorGenerico<>());
     }
 
-    public OrderedList(Order<T> order, Comparator<T> comparator){
+    public OrderedList(Comparator<T> comparator){
         this.startNode = null;
         this.pointer = null;
-        this.order = order;
+//        this.order = order;
         this.comparator = comparator;
     }
 
-    public void insertNode(Node<T> node){
+    public void insertNode(T element){
+        Node<T> node = new Node<>(element);
         if (this.startNode == null){
             this.startNode = node;
-        }else if(this.order.isLower(node, this.startNode, this.comparator)){
+//        }else if(this.order.isLower(node, this.startNode, this.comparator)){
+        }else if(this.comparator.compare(node.getElement(), this.startNode.getElement()) < 0){
             node.setNextNode(this.startNode);
             this.startNode = node;
         } else {
             this.pointer = this.startNode;
             boolean found = false;
             while (!found && (this.pointer.getNextNode() != null)) {
-                if (this.order.isLower(node, this.pointer.getNextNode(), this.comparator)){
+//                if (this.order.isLower(node, this.pointer.getNextNode(), this.comparator)){
+                if (this.comparator.compare(node.getElement(), this.pointer.getNextNode().getElement()) < 0){
                     found = true;
                 } else {
                     this.pointer = this.pointer.getNextNode();
@@ -72,7 +77,8 @@ public class OrderedList<T> implements Iterable<T>{
         }
     }
 
-    public void deleteNode(Node<T> node){
+    public void deleteNode(T element){
+        Node<T> node = new Node<>(element);
         if(this.startNode == null)
             return;
         this.pointer = this.startNode;
@@ -92,7 +98,8 @@ public class OrderedList<T> implements Iterable<T>{
         }
     }
 
-    public int getElementPosition(Node<T> node){
+    public int getElementPosition(T element){
+        Node <T> node = new Node(element);
         this.pointer = this.startNode;
         int pointerPosition = 0;
         while (this.pointer != null){
@@ -110,21 +117,21 @@ public class OrderedList<T> implements Iterable<T>{
         return this.startNode;
     }
 
-    public void setOrder(Order<T> order){
-        OrderedList<T> aux = new OrderedList<>(order, this.comparator);
+    public void invertOrder(){
+        OrderedList<T> aux = new OrderedList<>(new ComparatorInverso<>(this.comparator));
         this.pointer = this.startNode;
         while (this.pointer != null){
-            Node<T> auxNode = new Node<>(this.pointer.getElement());
-            aux.insertNode(auxNode);
+//            Node<T> auxNode = new Node<>(this.pointer.getElement());
+            aux.insertNode(this.pointer.getElement());
             this.pointer = this.pointer.getNextNode();
         }
         this.startNode = aux.getStartNode();
     }
 
-    public void setComparator(Comparator<T> comparator){
-        this.comparator = comparator;
-        this.setOrder(this.order);
-    }
+//    public void setComparator(Comparator<T> comparator){
+//        this.comparator = comparator;
+//        this.setOrder(this.order);
+//    }
 
     @Override
     public Iterator<T> iterator() {

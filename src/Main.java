@@ -1,7 +1,6 @@
 import facultad.Alumno;
 import facultad.GrupoFacultad;
 import list.Node;
-import list.OrderDesc;
 import list.OrderedList;
 
 public class Main {
@@ -10,21 +9,25 @@ public class Main {
         OrderedList<Integer> listaNumeros = new OrderedList<>();
 
 //      --------------------INCISO A--------------------
-        listaNumeros.insertNode(new Node<>(10));
-        listaNumeros.insertNode(new Node<>(21));
-        listaNumeros.insertNode(new Node<>(1));
-        listaNumeros.insertNode(new Node<>(5));
-        listaNumeros.insertNode(new Node<>(11));
+        listaNumeros.insertNode(10);
+        listaNumeros.insertNode(21);
+        listaNumeros.insertNode(1);
+        listaNumeros.insertNode(5);
+        listaNumeros.insertNode(11);
 
         System.out.println("--------------------INCISO B--------------------");
         for(Object elem : listaNumeros){
             System.out.println(elem);
         }
 
+
+
         System.out.println("--------------------INCISO C--------------------");
+        Integer int1 = 5;
+        Integer int2 = 11;
         listaNumeros.deleteNode(0);
-        listaNumeros.deleteNode(new Node<>(5));
-        listaNumeros.deleteNode(new Node<>(11));
+        listaNumeros.deleteNode(int1);
+        listaNumeros.deleteNode(int2);
 
         for(Object elem : listaNumeros){
             System.out.println(elem);
@@ -32,10 +35,10 @@ public class Main {
 
         //      --------------------INCISO D--------------------
         OrderedList<String> listaPalabras = new OrderedList<>();
-        listaPalabras.insertNode(new Node<>("Facil"));
-        listaPalabras.insertNode(new Node<>("Es"));
-        listaPalabras.insertNode(new Node<>("Parcial"));
-        listaPalabras.insertNode(new Node<>("Prog 2"));
+        listaPalabras.insertNode("Facil");
+        listaPalabras.insertNode("Es");
+        listaPalabras.insertNode("Parcial");
+        listaPalabras.insertNode("Prog 2");
 
         System.out.println("--------------------INCISO E--------------------");
         for(Object elem : listaPalabras){
@@ -43,13 +46,13 @@ public class Main {
         }
 
         System.out.println("--------------------INCISO F--------------------");
-        System.out.println(listaPalabras.getElementPosition(new Node<>("Parcial")));
+        System.out.println(listaPalabras.getElementPosition("Parcial"));
 
         System.out.println("--------------------INCISO G--------------------");
-        System.out.println(listaPalabras.getElementPosition(new Node<>("Recuperatorio")));
+        System.out.println(listaPalabras.getElementPosition("Recuperatorio"));
 
         System.out.println("--------------------INCISO H--------------------");
-        listaPalabras.setOrder(new OrderDesc<>());
+        listaPalabras.invertOrder();
 
         for(Object elem : listaPalabras){
             System.out.println(elem);

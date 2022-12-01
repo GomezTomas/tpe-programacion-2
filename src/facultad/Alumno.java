@@ -64,4 +64,9 @@ public class Alumno extends ElementoFacultad{
     public int getCantidadAlumnos() {
         return 1;
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        return this.dni == ((Alumno)obj).getDni();
+    }
 }

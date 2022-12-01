@@ -3,23 +3,17 @@ package comparators;
 import facultad.Alumno;
 import facultad.ElementoFacultad;
 
-public class ComparatorDNI extends ComparatorElementoFacultad{
+public class ComparatorDNI extends ComparatorAlumno{
     public ComparatorDNI() {
         super();
     }
 
-    public ComparatorDNI(ComparatorElementoFacultad nextComparator) {
+    public ComparatorDNI(ComparatorAlumno nextComparator) {
         super(nextComparator);
     }
 
     @Override
-    public int comp(ElementoFacultad alu1, ElementoFacultad alu2) {
-        try {
-            Alumno aluAux1 = (Alumno) alu1;
-            Alumno aluAux2 = (Alumno) alu2;
-            return aluAux1.getDni() - aluAux2.getDni();
-        }catch (Exception e){
-            return 1;
-        }
+    public int comp(Alumno alu1, Alumno alu2) {
+        return alu1.getDni() - alu2.getDni();
     }
 }
