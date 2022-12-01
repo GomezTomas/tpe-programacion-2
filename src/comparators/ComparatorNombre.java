@@ -1,7 +1,6 @@
 package comparators;
 
 import facultad.Alumno;
-import facultad.ElementoFacultad;
 
 public class ComparatorNombre extends ComparatorAlumno{
     public ComparatorNombre() {

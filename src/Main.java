@@ -1,6 +1,8 @@
+import comparators.ComparatorCantAlumnos;
+import comparators.ComparatorInverso;
 import facultad.Alumno;
+import facultad.ElementoFacultad;
 import facultad.GrupoFacultad;
-import list.Node;
 import list.OrderedList;
 
 public class Main {
@@ -9,18 +11,16 @@ public class Main {
         OrderedList<Integer> listaNumeros = new OrderedList<>();
 
 //      --------------------INCISO A--------------------
-        listaNumeros.insertNode(10);
-        listaNumeros.insertNode(21);
-        listaNumeros.insertNode(1);
-        listaNumeros.insertNode(5);
-        listaNumeros.insertNode(11);
+        listaNumeros.insertElement(10);
+        listaNumeros.insertElement(21);
+        listaNumeros.insertElement(1);
+        listaNumeros.insertElement(5);
+        listaNumeros.insertElement(11);
 
         System.out.println("--------------------INCISO B--------------------");
         for(Object elem : listaNumeros){
             System.out.println(elem);
         }
-
-
 
         System.out.println("--------------------INCISO C--------------------");
         Integer int1 = 5;
@@ -35,10 +35,10 @@ public class Main {
 
         //      --------------------INCISO D--------------------
         OrderedList<String> listaPalabras = new OrderedList<>();
-        listaPalabras.insertNode("Facil");
-        listaPalabras.insertNode("Es");
-        listaPalabras.insertNode("Parcial");
-        listaPalabras.insertNode("Prog 2");
+        listaPalabras.insertElement("Facil");
+        listaPalabras.insertElement("Es");
+        listaPalabras.insertElement("Parcial");
+        listaPalabras.insertElement("Prog 2");
 
         System.out.println("--------------------INCISO E--------------------");
         for(Object elem : listaPalabras){
@@ -109,9 +109,6 @@ public class Main {
         unicen.addElemento(humanas);
         unicen.addElemento(exactas);
 
-        System.out.println("----------------------------------------");
-        System.out.println(unicen);
-
         GrupoFacultad olimpiadasMatematicas = new GrupoFacultad("Olimpiadas Matematicas");
         GrupoFacultad matea2 = new GrupoFacultad("Matea2");
         GrupoFacultad losFibo = new GrupoFacultad("LosFibo");
@@ -143,7 +140,13 @@ public class Main {
         olimpiadasMatematicas.addElemento(matea2);
         olimpiadasMatematicas.addElemento(losFibo);
 
+        OrderedList<ElementoFacultad> listaGruposFacultad = new OrderedList<>(new ComparatorInverso<>(new ComparatorCantAlumnos()));
+        listaGruposFacultad.insertElement(unicen);
+        listaGruposFacultad.insertElement(olimpiadasMatematicas);
         System.out.println("----------------------------------------");
-        System.out.println(olimpiadasMatematicas);
+
+        for(ElementoFacultad grupo : listaGruposFacultad){
+            System.out.println(grupo.getNombre());
+        }
     }
 }

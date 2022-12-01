@@ -67,6 +67,10 @@ public class Alumno extends ElementoFacultad{
 
     @Override
     public boolean equals(Object obj) {
-        return this.dni == ((Alumno)obj).getDni();
+        try {
+            return this.dni == ((Alumno)obj).getDni();
+        }catch (Exception e){
+            return false;
+        }
     }
 }
